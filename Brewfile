@@ -37,10 +37,11 @@ brew 'mackup'
 # brew 'ghq'
 # brew 'peco'
 # brew 'zplug'
+brew 'coreutils'
 brew 'tree'
 brew 'heroku'
 brew 'openssl'
-
+brew 'rbenv'
 
 cask "alacritty"
 cask "alfred"
@@ -54,11 +55,9 @@ cask "neovim-nightly"
 cask "slack"
 cask "visual-studio-code"
 cask "zoom"
-
 cask 'appcleaner'
 cask 'docker'
 cask 'iterm2'
-cask 'sequel-pro'
 cask 'firefox'
 cask 'clipy'
 cask 'kindle'
@@ -68,7 +67,8 @@ cask 'ngrok'
 # cask 'vagrant'
 # cask 'vagrant-manager'
 # cask 'virtualbox'
+# cask 'sequel-pro'
 
- mas 'LINE', id: 539883307
- mas 'Microsoft OneNote', id: 784801555
- mas 'Duplicate Photos Fixer Pro', id: 963642514
+#  mas 'LINE', id: 539883307
+#  mas 'Microsoft OneNote', id: 784801555
+#  mas 'Duplicate Photos Fixer Pro', id: 963642514
