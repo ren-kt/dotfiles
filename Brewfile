@@ -1,35 +1,21 @@
-tap "cjbassi/ytop"
-tap "extrawurst/tap"
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
-tap "homebrew/services"
-tap "jason0x43/homebrew-neovim-nightly"
-tap "koekeishiya/formulae"
-tap 'heroku/brew'
-# tap "github/gh"
-# tap "wix/brew"
 cask_args appdir: "/Applications"
 
 brew "asdf"
 brew "bat"
 brew "curl"
 brew "exa"
-#brew "fzf"
-#brew "gh"
+# brew "fzf"
 brew "git"
 brew "grep"
-#brew "htop"
+# brew "htop"
 brew "jq"
 brew "mas"
-#brew "ncdu"
-brew "skhd"
+# brew "ncdu"
 brew "starship"
 brew "stow"
 brew "tealdeer"
 brew "tmux"
-brew "yabai"
-#brew "ytop"
-#brew "zoxide"
+# brew "zoxide"
 brew "zsh"
 brew "zsh-autosuggestions"
 brew "svn"
@@ -39,19 +25,24 @@ brew 'mackup'
 # brew 'zplug'
 brew 'coreutils'
 brew 'tree'
-brew 'heroku'
 brew 'openssl'
 brew 'rbenv'
+tap "koekeishiya/formulae"
+brew "yabai"
+brew "skhd"
+tap 'heroku/brew'
+brew 'heroku'
+# tap "github/gh"
+# brew "gh"
+# tap "cjbassi/ytop"
+# brew "ytop"
 
 cask "alacritty"
 cask "alfred"
-cask "font-roboto"
-cask "font-roboto-mono"
 cask "google-chrome"
 cask "google-japanese-ime"
 cask "hammerspoon"
 cask "insomnia"
-cask "neovim-nightly"
 cask "slack"
 cask "visual-studio-code"
 cask "zoom"
@@ -68,6 +59,11 @@ cask 'ngrok'
 # cask 'vagrant-manager'
 # cask 'virtualbox'
 # cask 'sequel-pro'
+tap "jason0x43/homebrew-neovim-nightly"
+cask "neovim-nightly"
+tap "homebrew/cask-fonts"
+cask "font-roboto"
+cask "font-roboto-mono"
 
 #  mas 'LINE', id: 539883307
 #  mas 'Microsoft OneNote', id: 784801555
