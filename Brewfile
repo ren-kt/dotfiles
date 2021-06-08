@@ -5,6 +5,7 @@ tap "homebrew/cask-fonts"
 tap "homebrew/services"
 tap "jason0x43/homebrew-neovim-nightly"
 tap "koekeishiya/formulae"
+tap 'heroku/brew'
 # tap "github/gh"
 # tap "wix/brew"
 cask_args appdir: "/Applications"
@@ -32,6 +33,14 @@ brew "yabai"
 brew "zsh"
 brew "zsh-autosuggestions"
 brew "svn"
+brew 'mackup'
+# brew 'ghq'
+# brew 'peco'
+# brew 'zplug'
+brew 'tree'
+brew 'heroku'
+brew 'openssl'
+
 
 cask "alacritty"
 cask "alfred"
@@ -46,4 +55,20 @@ cask "slack"
 cask "visual-studio-code"
 cask "zoom"
 
-#mas "Simple Recorder-Voice Recorder", id: 989175722
+cask 'appcleaner'
+cask 'docker'
+cask 'iterm2'
+cask 'sequel-pro'
+cask 'firefox'
+cask 'clipy'
+cask 'kindle'
+cask 'gyazo'
+cask 'ngrok'
+# cask 'mysqlworkbench' バージョンが新しすぎるためてブラウザからダウンロード(6.3.10)
+# cask 'vagrant'
+# cask 'vagrant-manager'
+# cask 'virtualbox'
+
+ mas 'LINE', id: 539883307
+ mas 'Microsoft OneNote', id: 784801555
+ mas 'Duplicate Photos Fixer Pro', id: 963642514
