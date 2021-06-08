@@ -1,0 +1,31 @@
+[user]
+	name       = xxxx
+	email      = xxxx@gmail.com
+[alias]
+	s   = status -sb
+	d   = diff
+	a   = add
+	aa  = add -A
+	b   = branch
+	co  = checkout
+	cob = checkout -b
+	c   = commit
+	cm  = commit -m
+	pso = push origin
+	pl  = pull
+	plo = pull origin
+	f   = fetch
+	fup = fetch upstream
+# [core]
+# 	excludesfile = ~/.gitignore
+# [commit]
+# 	gpgsign = true
+# [gpg]
+# 	program = /usr/local/MacGPG2/bin/gpg
+[pull]
+	rebase = false
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
