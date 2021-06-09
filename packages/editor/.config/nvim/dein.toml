@@ -3,21 +3,23 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'dense-analysis/ale'
+hook_add = '''
+let g:ale_linters_explicit = 1 " 明示的に要求したもの以外をALEに実行しない
+let g:ale_sign_column_always = 1 " 左端のシンボルカラムを表示したままにする
+let g:ale_fix_on_save = 1　"ファイル保存時に整形実行
+let g:ale_sign_error = 'E' " エラーのシンボル
+let g:ale_sign_warning = 'W' " 警告のシンボル
+'''
 
 [[plugins]]
 repo = 'frazrepo/vim-rainbow'
+hook_add = 'let g:rainbow_active = 1'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
-
-[[plugins]]
-repo = 'neovim/nvim-lspconfig'
-
-[[plugins]]
-repo = 'nvim-lua/completion-nvim'
 
 [[plugins]]
 repo = 'ruanyl/vim-gh-line'

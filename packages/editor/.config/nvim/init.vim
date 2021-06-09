@@ -24,8 +24,8 @@ call dein#load_toml('~/.config/nvim/dein_lazy.toml', {'lazy': 1})
 call dein#end()
 
 " Required:
-filetype plugin indent on
-syntax enable
+filetype plugin indent on " ファイル形式別プラグインとインデントを有効にする
+syntax enable " シンタックスを有効にする
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
@@ -34,32 +34,45 @@ endif
 
 "End dein Scripts-------------------------
 
+" オプション {{{
 set number
 set ts=4 sts=4 sw=4 expandtab
-set wrap
-set nobackup noswapfile noundofile
-set autoread
+set wrap " 画面の端で行を折り返す
+set nobackup noswapfile noundofile " バックアップファイル swpファイル undoファイル出力無効
+set autoread " 外部でファイルに変更がされた場合は読みなおす
+set belloff=all " ミュート
+set smartindent autoindent " 改行時自動インデント
+set incsearch " インクリメントサーチを有効にする
+set ignorecase " 検索時大文字小文字を区別しない
+set smartcase " 検索時に大文字を入力した場合ignorecaseが無効になる
+set hlsearch " ハイライトサーチを有効にする
+set undolevels=100 " undoできる最大数
+set lazyredraw " コマンド実行中は再描画しない
+set ttyfast " 高速ターミナル接続を行う
+set cursorline " カーソルラインを表示する
+set wildmenu " wildmenuを有効にする
+set helplang=ja " ヘルプの言語を日本語優先にする
+set noshowmode " 左下のインサートモードなどの文字を非表示にする
+set laststatus=2 " 下部のステータスラインを常に表示
+set list " 不可視文字を表示する
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:% " listの設定
+set clipboard+=unnamed " クリップボードを共有
+set mouse=a " スクロール
+" }}}
 
-let g:rainbow_active = 1
-
-" Colors
+" Colors {{{
 colorscheme material
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'default'
-set noshowmode
 
 if (has("termguicolors"))
   set termguicolors
 endif
+" }}}
 
-if !has('nvim')
-  let &t_ZH="\e[3m"
-  let &t_ZR="\e[23m"
-endif
-
-" Lightline
-set hidden
-set showtabline=2
+" Lightline {{{
+set hidden " 保存されていないファイルがあるときでも別のファイルを開くことが出来る
+set showtabline=2 " タブを表示する
 
 let g:lightline = {
     \ 'colorscheme': 'material_vim',
@@ -99,83 +112,108 @@ let g:lightline_buffer_active_buffer_left_icon = ''
 let g:lightline_buffer_active_buffer_right_icon = ''
 let g:lightline_buffer_separator_icon = '  '
 
-let g:lightline_buffer_enable_devicons = 1
-let g:lightline_buffer_show_bufnr = 1
-let g:lightline_buffer_fname_mod = ':t'
-let g:lightline_buffer_excludes = ['vimfiler']
-let g:lightline_buffer_maxflen = 30
-let g:lightline_buffer_maxfextlen = 3
-let g:lightline_buffer_minflen = 16
-let g:lightline_buffer_minfextlen = 3
-let g:lightline_buffer_reservelen = 20
+let g:lightline_buffer_enable_devicons = 1 " enable devicons, only support utf-8
+let g:lightline_buffer_show_bufnr = 1 " lightline-buffer function settings
+let g:lightline_buffer_fname_mod = ':t' " :help filename-modifiers
+let g:lightline_buffer_excludes = ['vimfiler'] " hide buffer list
+let g:lightline_buffer_maxflen = 30 " max file name length
+let g:lightline_buffer_maxfextlen = 3 " max file extension length
+let g:lightline_buffer_minflen = 16 " min file name length
+let g:lightline_buffer_minfextlen = 3 " min file extension length
+let g:lightline_buffer_reservelen = 20 " reserve length for other component (e.g. info, close)
 
 function! FilenameForLightline()
     return expand('%')
 endfunction
 
 " Completion
-set completeopt=menuone,noinsert,noselect
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+set completeopt=menuone,noinsert,noselect ' 入力モードでの補完についてのオプション
+" }}}
 
-" LSP
-lua << EOF
-    require'lspconfig'.flow.setup{on_attach=require'completion'.on_attach}
-    require'lspconfig'.yamlls.setup{on_attach=require'completion'.on_attach}
-    require'lspconfig'.tsserver.setup{
-        on_attach=require'completion'.on_attach;
-        filetypes = {"typescript", "typescriptreact", "typescript.tsx"};
-    }
-EOF
+" テキストオブジェクトキーマッピング {{{
+onoremap 8 i(
+onoremap 2 i"
+onoremap 7 i'
+onoremap @ i`
+onoremap [ i[
+onoremap { i{
 
-" Key Bindings
-let mapleader = ";"
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <leader>n <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <leader>p <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <c-l> :bn<CR>
-nnoremap <c-h> :bp<CR>
-nnoremap <c-p> :Files<CR>
-nnoremap <c-f> :Rg<CR>
-nnoremap <c-g> :Commits<CR>
+onoremap a8 a(
+onoremap a2 a"
+onoremap a7 a'
+onoremap a@ a`
+onoremap a[ a[
+onoremap a{ a{
 
-" netrw
-let loaded_netrwPlugin   = 1
-" let g:netrw_banner       = 0
-" let g:netrw_keepdir      = 0
-" let g:netrw_liststyle    = 3
-" let g:netrw_sort_options = 'i'
-" let g:netrw_browse_split = 0
+" visual
+nnoremap v8 vi(
+nnoremap v2 vi"
+nnoremap v7 vi'
+nnoremap v@ vi`
+nnoremap v[ vi[
+nnoremap v{ vi{
 
-" ALE
-let g:ale_linters_explicit = 1
-let g:ale_sign_column_always = 1
-let g:ale_fix_on_save = 1
-let g:ale_sign_error = 'E'
-let g:ale_sign_warning = 'W'
+nnoremap va8 va(
+nnoremap va2 va"
+nnoremap va7 va'
+nnoremap va@ va`
+nnoremap va[ va[
+nnoremap va{ va{
+" }}}
 
-" FZF
+" タブ切り替え
+nnoremap <C-l> gt
+
+" 改行
+nnoremap <C-j> o<ESC>
+nnoremap <C-k> O<ESC>
+nnoremap o A<CR>
+
+" 囲う
+nnoremap <silent> gw[ cw``<Esc>P
+vnoremap <silent> gw[ c``<Esc>P
+
+" コマンドラインで単語移動 {{{
+cnoremap <c-b> <Left>
+cnoremap <c-f> <Right>
+cnoremap <c-a> <Home>
+" }}}
+
+
+" FZF {{{
 let g:fzf_buffers_jump = 1
 let g:fzf_layout = { 'down': '40%' }
+" }}}
 
-" LF
+" LF {{{
 let g:lf_map_keys = 0
+" }}}
 
-" TODO: why it opens in split panel?
-map <c-t> :LfWorkingDirectoryExistingOrNewTab<CR>
+" カーソルラインの位置を保存する {{{
+augroup cursorlineRestore
+  au!
+  au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g'\"" |
+        \ endif
+augroup END
+" }}}
 
-function! s:DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
-endfunction
-com! DiffSaved call s:DiffWithSaved()
+ " undoを編集前に戻せるように設定 {{{
+if has('persistent_undo')
+  set undodir=~/.config/nvim/undo
+  set undofile
+endif
+"}}}
+
+" ファイルツリーの表示形式、1にするとls -laのような表示になります {{{
+let g:netrw_liststyle=1
+" ヘッダを非表示にする
+let g:netrw_banner=0
+" サイズを(K,M,G)で表示する
+let g:netrw_sizestyle="H"
+" 日付フォーマットを yyyy/mm/dd(曜日) hh:mm:ss で表示する
+let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
+" プレビューウィンドウを垂直分割で表示する
+let g:netrw_preview=1
+" }}}

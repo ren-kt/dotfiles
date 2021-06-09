@@ -4,8 +4,6 @@ call plug#begin('~/.local/share/nvim/autoload/plugged')
     Plug 'frazrepo/vim-rainbow'
     Plug 'itchyny/lightline.vim'
     Plug 'jiangmiao/auto-pairs'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'nvim-lua/completion-nvim'
     Plug 'ruanyl/vim-gh-line'
     Plug 'taohexxx/lightline-buffer'
     Plug 'terryma/vim-multiple-cursors'
