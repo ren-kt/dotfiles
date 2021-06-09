@@ -1,6 +1,7 @@
 [user]
 	name       = xxxx
 	email      = xxxx@gmail.com
+
 [alias]
 	s   = status -sb
 	d   = diff
@@ -16,14 +17,7 @@
 	plo = pull origin
 	f   = fetch
 	fup = fetch upstream
-# [core]
-# 	excludesfile = ~/.gitignore
-# [commit]
-# 	gpgsign = true
-# [gpg]
-# 	program = /usr/local/MacGPG2/bin/gpg
-[pull]
-	rebase = false
+
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process

@@ -1,8 +1,8 @@
-add_newline = false
+add_newline = true
 
 [character]
-success_symbol = "🦄 " 
-error_symbol = "🥺 "
+# success_symbol = "🦄 " 
+# error_symbol = "🥺 "
 
 [git_branch]
 symbol = "🌱 "
@@ -19,3 +19,7 @@ modified = " 📝 "
 staged = '[++\($count\)](green)'
 renamed = " 👅 "
 deleted = " 🗑 "
+
+[directory]
+truncation_length = 100
+truncate_to_repo = false
