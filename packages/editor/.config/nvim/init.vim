@@ -1,6 +1,39 @@
-source ~/.config/nvim/vim-plug/plugins.vim
-syntax enable
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=/Users/ren/.cache/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+call dein#begin('/Users/ren/.cache/dein')
+
+" Let dein manage dein
+" Required:
+call dein#add('/Users/ren/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+" Add or remove your plugins here like this:
+"call dein#add('Shougo/neosnippet.vim')
+"call dein#add('Shougo/neosnippet-snippets')
+
+call dein#load_toml('~/.config/nvim/dein.toml', {'lazy': 0})
+call dein#load_toml('~/.config/nvim/dein_lazy.toml', {'lazy': 1})
+
+" Required:
+call dein#end()
+
+" Required:
 filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
+
 set number
 set ts=4 sts=4 sw=4 expandtab
 set wrap

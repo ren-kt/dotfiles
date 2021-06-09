@@ -1,0 +1,72 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'dense-analysis/ale'
+
+[[plugins]]
+repo = 'frazrepo/vim-rainbow'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+
+[[plugins]]
+repo = 'nvim-lua/completion-nvim'
+
+[[plugins]]
+repo = 'ruanyl/vim-gh-line'
+
+[[plugins]]
+repo = 'taohexxx/lightline-buffer'
+
+[[plugins]]
+repo = 'terryma/vim-multiple-cursors'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'voldikss/vim-floaterm'
+
+" LF
+[[plugins]]
+repo = 'ptzz/lf.vim'
+
+[[plugins]]
+repo = 'voldikss/vim-floaterm'
+
+" FZF
+[[plugins]]
+repo = 'junegunn/fzf'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+
+" Language Specific
+[[plugins]]
+repo = 'yuezk/vim-js'
+
+[[plugins]]
+repo = 'maxmellon/vim-jsx-pretty'
+
+[[plugins]]
+repo = 'HerringtonDarkholme/yats.vim'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+" Color Scheme
+[[plugins]]
+repo = 'drewtempelmeyer/palenight.vim'
+
+[[plugins]]
+repo = 'haishanh/night-owl.vim'
+
+[[plugins]]
+repo = 'kaicataldo/material.vim', { 'branch': 'main' }
