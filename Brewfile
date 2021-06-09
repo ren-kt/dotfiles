@@ -1,11 +1,12 @@
 cask_args appdir: "/Applications"
 
+brew 'coreutils'
+brew "curl"
+brew "git"
 brew "asdf"
 brew "bat"
-brew "curl"
 brew "exa"
 # brew "fzf"
-brew "git"
 brew "grep"
 # brew "htop"
 brew "jq"
@@ -23,7 +24,6 @@ brew 'mackup'
 # brew 'ghq'
 # brew 'peco'
 # brew 'zplug'
-brew 'coreutils'
 brew 'tree'
 brew 'openssl'
 brew 'rbenv'
