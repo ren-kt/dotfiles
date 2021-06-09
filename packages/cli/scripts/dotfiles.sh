@@ -115,12 +115,6 @@ done
 
 sudo chmod -R a+wr /usr/local/bin
 
-# plug_path=~/.local/share/nvim/site/autoload/plug.vim
-# if ! is_file "$plug_path"; then
-#     log 'Setup vim-plug"'
-#     sh -c "curl -fLo $plug_path --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-# fi
-
 dein_cache_path=~/.cache/dein
 if ! is_dir "$dein_cache_path"; then
     log 'Setup dein.vim"'

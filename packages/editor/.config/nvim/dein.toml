@@ -22,15 +22,72 @@ hook_add = 'let g:rainbow_active = 1'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+depends = ['lightline-buffer', 'material.vim']
+hook_add = '''
+set hidden " 保存されていないファイルがあるときでも別のファイルを開くことが出来る
+set showtabline=2 " タブを表示する
+
+let g:lightline = {
+    \ 'colorscheme': 'material_vim',
+    \ 'component_function': {
+    \   'bufferinfo': 'lightline#buffer#bufferinfo',
+    \   'filename': 'FilenameForLightline',
+    \ },
+    \ 'tabline': {
+    \   'left': [ [ 'bufferinfo' ],
+    \             [ 'separator' ],
+    \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
+    \   'right': [ [ 'close' ], ],
+    \ },
+    \ 'component_expand': {
+    \   'buffercurrent': 'lightline#buffer#buffercurrent',
+    \   'bufferbefore': 'lightline#buffer#bufferbefore',
+    \   'bufferafter': 'lightline#buffer#bufferafter',
+    \ },
+    \ 'component_type': {
+    \   'buffercurrent': 'tabsel',
+    \   'bufferbefore': 'raw',
+    \   'bufferafter': 'raw',
+    \ },
+    \ 'component': {
+    \   'separator': '',
+    \ },
+    \ }
+
+let g:lightline_buffer_logo = ' '
+let g:lightline_buffer_readonly_icon = ''
+let g:lightline_buffer_modified_icon = '✭'
+let g:lightline_buffer_git_icon = ' '
+let g:lightline_buffer_ellipsis_icon = '..'
+let g:lightline_buffer_expand_left_icon = '◀ '
+let g:lightline_buffer_expand_right_icon = ' ▶'
+let g:lightline_buffer_active_buffer_left_icon = ''
+let g:lightline_buffer_active_buffer_right_icon = ''
+let g:lightline_buffer_separator_icon = '  '
+
+let g:lightline_buffer_enable_devicons = 1 " enable devicons, only support utf-8
+let g:lightline_buffer_show_bufnr = 1 " lightline-buffer function settings
+let g:lightline_buffer_fname_mod = ':t' " :help filename-modifiers
+let g:lightline_buffer_excludes = ['vimfiler'] " hide buffer list
+let g:lightline_buffer_maxflen = 30 " max file name length
+let g:lightline_buffer_maxfextlen = 3 " max file extension length
+let g:lightline_buffer_minflen = 16 " min file name length
+let g:lightline_buffer_minfextlen = 3 " min file extension length
+let g:lightline_buffer_reservelen = 20 " reserve length for other component (e.g. info, close)
+
+function! FilenameForLightline()
+    return expand('%')
+endfunction
+'''
+
+[[plugins]]
+repo = 'taohexxx/lightline-buffer'
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
 
 [[plugins]]
 repo = 'ruanyl/vim-gh-line'
-
-[[plugins]]
-repo = 'taohexxx/lightline-buffer'
 
 [[plugins]]
 repo = 'terryma/vim-multiple-cursors'
@@ -41,6 +98,9 @@ repo = 'tpope/vim-commentary'
 # LF
 [[plugins]]
 repo = 'ptzz/lf.vim'
+build_on = '''
+let g:lf_map_keys = 0
+'''
 
 [[plugins]]
 repo = 'voldikss/vim-floaterm'
@@ -48,6 +108,10 @@ repo = 'voldikss/vim-floaterm'
 # FZF
 [[plugins]]
 repo = 'junegunn/fzf'
+build_on = '''
+let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'down': '40%' }
+'''
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
@@ -67,16 +131,10 @@ repo = 'cespare/vim-toml'
 
 # Color Scheme
 [[plugins]]
-repo = 'drewtempelmeyer/palenight.vim'
-
-[[plugins]]
-repo = 'haishanh/night-owl.vim'
-
-[[plugins]]
 repo = 'kaicataldo/material.vim'
 rev  = 'main'
-hook_add = '''
-colorscheme material
+hook_source = '''
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'default'
+colorscheme material
 '''

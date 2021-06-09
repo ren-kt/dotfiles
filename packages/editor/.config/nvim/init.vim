@@ -32,13 +32,20 @@ if dein#check_install()
   call dein#install()
 endif
 
+" plugin remove check
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+  call map(s:removed_plugins, "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+endif
+
 "End dein Scripts-------------------------
 
 " オプション {{{
 set number
 set ts=4 sts=4 sw=4 expandtab
 set wrap " 画面の端で行を折り返す
-set nobackup noswapfile noundofile " バックアップファイル swpファイル undoファイル出力無効
+set nobackup noswapfile " バックアップファイル swpファイル 出力無効
 set autoread " 外部でファイルに変更がされた場合は読みなおす
 set belloff=all " ミュート
 set smartindent autoindent " 改行時自動インデント
@@ -66,64 +73,37 @@ if (has("termguicolors"))
 endif
 " }}}
 
-" Lightline {{{
-set hidden " 保存されていないファイルがあるときでも別のファイルを開くことが出来る
-set showtabline=2 " タブを表示する
-
-let g:lightline = {
-    \ 'colorscheme': 'material_vim',
-    \ 'component_function': {
-    \   'bufferinfo': 'lightline#buffer#bufferinfo',
-    \   'filename': 'FilenameForLightline',
-    \ },
-    \ 'tabline': {
-    \   'left': [ [ 'bufferinfo' ],
-    \             [ 'separator' ],
-    \             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
-    \   'right': [ [ 'close' ], ],
-    \ },
-    \ 'component_expand': {
-    \   'buffercurrent': 'lightline#buffer#buffercurrent',
-    \   'bufferbefore': 'lightline#buffer#bufferbefore',
-    \   'bufferafter': 'lightline#buffer#bufferafter',
-    \ },
-    \ 'component_type': {
-    \   'buffercurrent': 'tabsel',
-    \   'bufferbefore': 'raw',
-    \   'bufferafter': 'raw',
-    \ },
-    \ 'component': {
-    \   'separator': '',
-    \ },
-    \ }
-
-let g:lightline_buffer_logo = ' '
-let g:lightline_buffer_readonly_icon = ''
-let g:lightline_buffer_modified_icon = '✭'
-let g:lightline_buffer_git_icon = ' '
-let g:lightline_buffer_ellipsis_icon = '..'
-let g:lightline_buffer_expand_left_icon = '◀ '
-let g:lightline_buffer_expand_right_icon = ' ▶'
-let g:lightline_buffer_active_buffer_left_icon = ''
-let g:lightline_buffer_active_buffer_right_icon = ''
-let g:lightline_buffer_separator_icon = '  '
-
-let g:lightline_buffer_enable_devicons = 1 " enable devicons, only support utf-8
-let g:lightline_buffer_show_bufnr = 1 " lightline-buffer function settings
-let g:lightline_buffer_fname_mod = ':t' " :help filename-modifiers
-let g:lightline_buffer_excludes = ['vimfiler'] " hide buffer list
-let g:lightline_buffer_maxflen = 30 " max file name length
-let g:lightline_buffer_maxfextlen = 3 " max file extension length
-let g:lightline_buffer_minflen = 16 " min file name length
-let g:lightline_buffer_minfextlen = 3 " min file extension length
-let g:lightline_buffer_reservelen = 20 " reserve length for other component (e.g. info, close)
-
-function! FilenameForLightline()
-    return expand('%')
-endfunction
-
-" Completion
+" Completion {{{
 set completeopt=menuone,noinsert,noselect " 入力モードでの補完についてのオプション
+" }}}
+
+" カーソルラインの位置を保存する {{{
+augroup cursorlineRestore
+  au!
+  au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g'\"" |
+        \ endif
+augroup END
+" }}}
+
+" undoを編集前に戻せるように設定 {{{
+if has('persistent_undo')
+  let undo_path = expand('~/.config/nvim/undo')
+  if !isdirectory(undo_path)
+    call mkdir(undo_path, 'p')
+  endif
+  exec 'set undodir=' .. undo_path
+  set undofile
+endif
+" }}}
+
+" ファイラ {{{
+let g:netrw_liststyle=1 " ファイルツリーの表示形式、1にするとls -laのような表示
+let g:netrw_banner=0 " ヘッダを非表示にする
+let g:netrw_sizestyle="H" " サイズを(K,M,G)で表示する
+let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S" " yyyy/mm/dd(曜日) hh:mm:ss で表示
+let g:netrw_preview=1 " プレビューウィンドウを垂直分割で表示する
 " }}}
 
 " テキストオブジェクトキーマッピング {{{
@@ -155,7 +135,6 @@ nnoremap va7 va'
 nnoremap va@ va`
 nnoremap va[ va[
 nnoremap va{ va{
-" }}}
 
 " タブ切り替え
 nnoremap <C-l> gt
@@ -169,47 +148,8 @@ nnoremap o A<CR>
 nnoremap <silent> gw[ cw``<Esc>P
 vnoremap <silent> gw[ c``<Esc>P
 
-" コマンドラインで単語移動 {{{
+" コマンドラインで単語移動
 cnoremap <c-b> <Left>
 cnoremap <c-f> <Right>
 cnoremap <c-a> <Home>
-" }}}
-
-
-" FZF {{{
-let g:fzf_buffers_jump = 1
-let g:fzf_layout = { 'down': '40%' }
-" }}}
-
-" LF {{{
-let g:lf_map_keys = 0
-" }}}
-
-" カーソルラインの位置を保存する {{{
-augroup cursorlineRestore
-  au!
-  au BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal! g'\"" |
-        \ endif
-augroup END
-" }}}
-
- " undoを編集前に戻せるように設定 {{{
-if has('persistent_undo')
-  set undodir=~/.config/nvim/undo
-  set undofile
-endif
-"}}}
-
-" ファイルツリーの表示形式、1にするとls -laのような表示になります {{{
-let g:netrw_liststyle=1
-" ヘッダを非表示にする
-let g:netrw_banner=0
-" サイズを(K,M,G)で表示する
-let g:netrw_sizestyle="H"
-" 日付フォーマットを yyyy/mm/dd(曜日) hh:mm:ss で表示する
-let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
-" プレビューウィンドウを垂直分割で表示する
-let g:netrw_preview=1
 " }}}
