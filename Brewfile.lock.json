@@ -733,7 +733,7 @@
         }
       },
       "docker": {
-        "version": "3.3.3,64133",
+        "version": "3.4.0,65384",
         "options": {
           "full_name": "docker",
           "args": {
@@ -842,7 +842,7 @@
       "big_sur": {
         "HOMEBREW_VERSION": "3.1.11",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "7f7b9b3879b078f83aad0f8bdfbf5e6f86721cf0",
+        "Homebrew/homebrew-core": "a1e2557457ae38e8e68d7a3444eaf153c4d262bd",
         "CLT": "12.5.0.0.1.1617976050",
         "Xcode": "12.5",
         "macOS": "11.4"

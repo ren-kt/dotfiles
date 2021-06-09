@@ -11,7 +11,7 @@ call dein#begin('/Users/ren/.cache/dein')
 
 " Let dein manage dein
 " Required:
-call dein#add('/Users/ren/.cache/dein/repos/github.com/Shougo/dein.vim')
+" call dein#add('/Users/ren/.cache/dein/repos/github.com/Shougo/dein.vim')
 
 " Add or remove your plugins here like this:
 "call dein#add('Shougo/neosnippet.vim')
@@ -61,10 +61,6 @@ set mouse=a " スクロール
 " }}}
 
 " Colors {{{
-colorscheme material
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'default'
-
 if (has("termguicolors"))
   set termguicolors
 endif
@@ -127,7 +123,7 @@ function! FilenameForLightline()
 endfunction
 
 " Completion
-set completeopt=menuone,noinsert,noselect ' 入力モードでの補完についてのオプション
+set completeopt=menuone,noinsert,noselect " 入力モードでの補完についてのオプション
 " }}}
 
 " テキストオブジェクトキーマッピング {{{
