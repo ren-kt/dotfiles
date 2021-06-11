@@ -1,28 +1,39 @@
-# shellcheck disable=SC2034
-source /usr/local/opt/zplug/init.zsh
-
-# zsh-completions
-# fpath=(~/.zplug/repos/zsh-users/zsh-completions/src ~/.zsh/completion "${fpath[@]}")
-# fpath=(/usr/local/opt/zplug/repos/zsh-users/zsh-completions $fpath)
-
-
-# zplug
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "b4b4r07/zsh-vimode-visual", defer:3
-zplug "zsh-users/zsh-completions"
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "zsh-users/zsh-autosuggestions"
-zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
-zplug load
-setopt nonomatch
-if [[ ${#ZSH_HIGHLIGHT_STYLES[@]} -ne 0 ]]; then
-    export ZSH_HIGHLIGHT_STYLES['path']='fg=081'
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# enhancd
-export ENHANCD_FILTER=peco
-export ENHANCD_DISABLE_DOT=1
-export ENHANCD_DISABLE_HOME=1
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
+### End of Zinit's installer chunk
+
+## コマンド補完
+# 非同期でプラグインを読み込むオプション
+zinit ice wait'0' lucid; zinit light zsh-users/zsh-completions
+autoload -Uz compinit && compinit
+
+## 補完で小文字でも大文字にマッチさせる
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+## 補完候補を一覧表示したとき、Tabや矢印で選択できるようにする
+zstyle ':completion:*:default' menu select=1 
+
+## シンタックスハイライト
+zinit light zsh-users/zsh-syntax-highlighting
+
+## 履歴補完
+zinit light zsh-users/zsh-autosuggestions

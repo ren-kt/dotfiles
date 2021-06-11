@@ -1,6 +1,6 @@
 cask_args appdir: "/Applications"
 
-brew 'coreutils'
+# brew 'coreutils'
 brew "curl"
 brew "git"
 brew "asdf"
@@ -19,12 +19,10 @@ brew "tealdeer"
 brew "tmux"
 # brew "zoxide"
 brew "zsh"
-brew "zsh-autosuggestions"
 brew "svn"
 brew 'mackup'
-# brew 'ghq'
-# brew 'peco'
-# brew 'zplug'
+brew 'ghq'
+brew 'peco'
 brew 'tree'
 brew 'openssl'
 brew 'rbenv'

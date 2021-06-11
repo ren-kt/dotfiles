@@ -2,7 +2,7 @@ export PATH=$PATH:$HOME/scripts
 export GIT_CLONE_PATH="$HOME"/src/github.com/edm20627
 
 # inport plugin {{{
-# source ~/.zsh/config/plugin.zsh
+source ~/.zsh/plugin.zsh
 # }}}
 
 # history {{{
@@ -45,6 +45,8 @@ unsetopt list_types
 setopt no_beep
 # ビープ音の停止(補完時)
 setopt nolistbeep
+# 環境変数を補完
+setopt AUTO_PARAM_KEYS
 # }}}
 
 # asdf
@@ -55,7 +57,6 @@ fi
 
 # starship {{{
 eval "$(starship init zsh)"
-# eval "$(zoxide init zsh)"
 # }}}
 
 # zoxide {{{
@@ -70,21 +71,13 @@ eval "$(starship init zsh)"
 # fi
 # }}}
 
-# zsh-autosuggestions
-if [[ -f $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-    . $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-# }}}
-
 # sub files {{{
-# key
-source ~/.zsh/config/key.zsh
 # alias
-source ~/.zsh/config/alias.zsh
+source ~/.zsh/alias.zsh
 # completion
-source ~/.zsh/config/completion.zsh
+# source ~/.zsh/completion.zsh
 # peco
-source ~/.zsh/config/search.zsh
+source ~/.zsh/search.zsh
 # local setting
 if [[ -e ~/.zshrc_local ]]; then
     source ~/.zshrc_local

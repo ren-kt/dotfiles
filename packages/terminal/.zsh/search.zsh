@@ -37,22 +37,22 @@ bindkey '^E' peco-cdr
 
 
 # Ctrl + F = find and open
-export EDITOR=vi
+export EDITOR=nvim
 function peco-find () {
     local base="."
     if [ -n "$LBUFFER" ] && [ ! "$LBUFFER" =~ " $" ]; then
-        last_path="$(echo "$LBUFFER" | sed -e 's/^.*\ //g')"
+        local last_path="$(echo $LBUFFER | sed -e 's/^.*\ //g')"
         if [ -d "$last_path" ]; then
             base="$last_path"
         fi
     fi
-    filepath="$(find "$base" | grep -v '/\.' | peco --prompt 'PATH>')"
+    local filepath="$(find $base | grep -v '/\.' | peco --prompt 'PATH>')"
     [ -z "$filepath" ] && return
     if [ -n "$LBUFFER" ]; then
         if [ "$base" = "." ]; then
             BUFFER="$LBUFFER$filepath"
         else
-            BUFFER="$(echo "$LBUFFER" | sed -e "s#${base}\$##g")$filepath"
+            BUFFER="$(echo $LBUFFER | sed -e "s#${base}\$##g")$filepath"
         fi
     else
         if [ -d "$filepath" ]; then
