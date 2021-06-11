@@ -88,18 +88,20 @@ export GIT_CLONE_PATH="$HOME"/src/github.com/edm20627
 # golang
 # export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-# tmux
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git
+# # tmux
+# # バージョン管理システムから情報を取得
+# autoload -Uz vcs_info
+# zstyle ':vcs_info:*' enable git
 
-precmd () {
-    LANG=en_US.UTF-8 vcs_info
-    # shellcheck disable=SC2154
-    if [[ -z ${vcs_info_msg_0_} ]] || [[ -e .git ]]; then
-        tmux rename-window "$(basename "$(pwd)")"
-    fi
-}
-# }}}
+# precmd () {
+#     LANG=en_US.UTF-8 vcs_info
+#     # shellcheck disable=SC2154
+#     # vcs_info_msg_0_変数にバージョン管理システムの情報が格納
+#     if [[ -z ${vcs_info_msg_0_} ]] || [[ -e .git ]]; then
+#         tmux rename-window "$(basename "$(pwd)")"
+#     fi
+# }
+# # }}}
 
 # sub files {{{
 # alias
