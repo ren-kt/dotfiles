@@ -1,6 +1,3 @@
-export PATH=$PATH:$HOME/scripts
-export GIT_CLONE_PATH="$HOME"/src/github.com/edm20627
-
 # inport plugin {{{
 source ~/.zsh/plugin.zsh
 # }}}
@@ -30,9 +27,9 @@ zstyle ':chpwd:*' recent-dirs-file ~/.cache/chpwd-recent-dirs
 
 
 # color {{{
+export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 # 補完候補にもシンタックスハイライトが反映される設定
-# colors関数を読み込んで、実行する
-autoload -Uz colors && colors
+# verboseスタイルにyes
 zstyle ':completion:*' verbose yes
 # 補完候補一覧をカラー表示
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -47,6 +44,18 @@ setopt no_beep
 setopt nolistbeep
 # 環境変数を補完
 setopt AUTO_PARAM_KEYS
+# }}}
+
+# FUNCTION {{{
+function pr-open {
+    local url
+    url=$(hub pr list -h "$(git symbolic-ref --short HEAD)" -f "%U")
+    if [[ -z $url ]]; then
+        echo "The PR based this branch not found."
+        return 1
+    fi
+    open "$url"
+}
 # }}}
 
 # asdf
@@ -71,11 +80,32 @@ eval "$(starship init zsh)"
 # fi
 # }}}
 
+# OTHER {{{
+export PATH=$PATH:$HOME/scripts
+
+export GIT_CLONE_PATH="$HOME"/src/github.com/edm20627
+
+# golang
+# export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# tmux
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+
+precmd () {
+    LANG=en_US.UTF-8 vcs_info
+    # shellcheck disable=SC2154
+    if [[ -z ${vcs_info_msg_0_} ]] || [[ -e .git ]]; then
+        tmux rename-window "$(basename "$(pwd)")"
+    fi
+}
+# }}}
+
 # sub files {{{
 # alias
 source ~/.zsh/alias.zsh
 # completion
-# source ~/.zsh/completion.zsh
+source ~/.zsh/completion.zsh
 # peco
 source ~/.zsh/search.zsh
 # local setting

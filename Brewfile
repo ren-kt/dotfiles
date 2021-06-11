@@ -19,13 +19,14 @@ brew "tealdeer"
 brew "tmux"
 # brew "zoxide"
 brew "zsh"
-brew "svn"
+# brew "svn"
 brew 'mackup'
 brew 'ghq'
 brew 'peco'
 brew 'tree'
 brew 'openssl'
 brew 'rbenv'
+brew 'hub'
 tap "koekeishiya/formulae"
 brew "yabai"
 brew "skhd"
