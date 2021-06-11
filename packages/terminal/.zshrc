@@ -72,14 +72,6 @@ eval "$(starship init zsh)"
 # eval "$(zoxide init zsh)"
 # }}}
 
-# FZF {{{
-# export FZF_DEFAULT_COMMAND="rg --files --hidden -l -g '!.git/*' -g '!node_modules/*'"
-# export FZF_DEFAULT_OPTS="-m --height 100% --border --preview 'cat {}'"
-# if [[ -f ~/.fzf.zsh ]]; then
-#     source ~/.fzf.zsh
-# fi
-# }}}
-
 # OTHER {{{
 export PATH=$PATH:$HOME/scripts
 
@@ -108,7 +100,7 @@ export GIT_CLONE_PATH="$HOME"/src/github.com/edm20627
 source ~/.zsh/alias.zsh
 # completion
 source ~/.zsh/completion.zsh
-# peco
+# fzf
 source ~/.zsh/search.zsh
 # local setting
 if [[ -e ~/.zshrc_local ]]; then

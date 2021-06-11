@@ -1,68 +1,63 @@
-# shellcheck disable=SC2034
+export FZF_DEFAULT_COMMAND="rg --files --hidden -l --glob '!**/.git/*' --glob '!**/node_modules/*'"
+export FZF_DEFAULT_OPTS="-m --height 50% --reverse --ansi"
+
+function is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
 # Ctrl + R = history search
-function peco-history-selection() {
-    BUFFER=$(history -n 1 | tac  | awk '!a[$0]++' | peco)
+function fzf-history-selection() {
+    BUFFER=$(history -n 1 | tac  | awk '!a[$0]++' | fzf --no-sort --preview=)
     CURSOR=$#BUFFER
     zle reset-prompt
 }
-zle -N peco-history-selection
-bindkey '^R' peco-history-selection
-
+zle -N fzf-history-selection
+bindkey '^R' fzf-history-selection
 
 # Ctrl + G = ghq list
-function peco-ghq-look () {
+function fzf-ghq-look () {
     local selected_dir
     # shellcheck disable=SC2153
-    selected_dir=$(ghq list | peco --prompt="cd-ghq >" --query "$LBUFFER")
+    selected_dir=$(ghq list | fzf --preview=)
     if [ -n "$selected_dir" ]; then
         BUFFER="cd $(ghq list --full-path | grep --color=never -E "/$selected_dir$")"
         zle accept-line
     fi
 }
-zle -N peco-ghq-look
-bindkey '^G' peco-ghq-look
+zle -N fzf-ghq-look
+bindkey '^G' fzf-ghq-look
 
+# Ctrl + F = find and vim
+function fzf-find () {
+    local selected
+    if is_in_git_repo; then
+        selected=$(git ls-files | fzf)
+    else
+        selected=$(eval $FZF_DEFAULT_COMMAND | fzf)
+    fi
+    if [ -n "$selected" ]; then
+        BUFFER="vi ${selected}"
+        zle accept-line
+    fi
+}
+zle -N fzf-find
+bindkey '^F' fzf-find
 
 # Ctrl + E = cdr
-function peco-cdr () {
+function fzf-cdr (){
     local selected_dir
-    selected_dir="$(cdr -l | awk '{ print $2 }' | peco --prompt="cdr >" --query "$LBUFFER")"
+    selected_dir=$(cdr -l | awk '{ print $2 }' | fzf --preview 'f() { sh -c "ls -hFGl $1" }; f {}')
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
     fi
 }
-zle -N peco-cdr
-bindkey '^E' peco-cdr
+zle -N fzf-cdr
+bindkey '^E' fzf-cdr
 
-
-# Ctrl + F = find and open
-export EDITOR=nvim
-function peco-find () {
-    local base="."
-    if [ -n "$LBUFFER" ] && [ ! "$LBUFFER" =~ " $" ]; then
-        local last_path="$(echo $LBUFFER | sed -e 's/^.*\ //g')"
-        if [ -d "$last_path" ]; then
-            base="$last_path"
-        fi
-    fi
-    local filepath="$(find $base | grep -v '/\.' | peco --prompt 'PATH>')"
-    [ -z "$filepath" ] && return
-    if [ -n "$LBUFFER" ]; then
-        if [ "$base" = "." ]; then
-            BUFFER="$LBUFFER$filepath"
-        else
-            BUFFER="$(echo $LBUFFER | sed -e "s#${base}\$##g")$filepath"
-        fi
-    else
-        if [ -d "$filepath" ]; then
-            BUFFER="cd $filepath"
-        elif [ -f "$filepath" ]; then
-            BUFFER="$EDITOR $filepath"
-        fi
-        zle accept-line
-    fi
-    CURSOR=$#BUFFER
+function fgs {
+  local branches branch
+  branches=$(git --no-pager branch -vv --color=always) &&
+  branch=$(echo "$branches" | fzf --preview=) &&
+  git switch "$(echo "$branch" | awk '{print $1}' | sed "s/.* //")"
 }
-zle -N peco-find
-bindkey '^F' peco-find

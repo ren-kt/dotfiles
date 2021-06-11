@@ -6,9 +6,10 @@ brew "git"
 brew "asdf"
 brew "bat"
 brew "exa"
-# brew "fzf"
+brew "fzf"
 # brew "lf"
 brew "grep"
+brew "ripgrep"
 # brew "htop"
 brew "jq"
 brew "mas"
@@ -22,7 +23,6 @@ brew "zsh"
 # brew "svn"
 brew 'mackup'
 brew 'ghq'
-brew 'peco'
 brew 'tree'
 brew 'openssl'
 brew 'rbenv'
