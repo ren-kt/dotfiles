@@ -37,31 +37,28 @@ bindkey '^E' peco-cdr
 
 
 # Ctrl + F = find and open
+export EDITOR=vi
 function peco-find () {
     local base="."
-    if [[ -n "$LBUFFER" ]] && [[ ! "$LBUFFER" =~ " $" ]]; then
-        local last_path
-        # shellcheck disable=SC2001
+    if [ -n "$LBUFFER" ] && [ ! "$LBUFFER" =~ " $" ]; then
         last_path="$(echo "$LBUFFER" | sed -e 's/^.*\ //g')"
         if [ -d "$last_path" ]; then
             base="$last_path"
         fi
     fi
-    local filepath
     filepath="$(find "$base" | grep -v '/\.' | peco --prompt 'PATH>')"
-    [[ -z "$filepath" ]] && return
+    [ -z "$filepath" ] && return
     if [ -n "$LBUFFER" ]; then
-        if [[ "$base" = "." ]]; then
+        if [ "$base" = "." ]; then
             BUFFER="$LBUFFER$filepath"
         else
-            # shellcheck disable=SC2001
             BUFFER="$(echo "$LBUFFER" | sed -e "s#${base}\$##g")$filepath"
         fi
     else
-        if [[ -d "$filepath" ]]; then
+        if [ -d "$filepath" ]; then
             BUFFER="cd $filepath"
-        elif [[ -f "$filepath" ]]; then
-            BUFFER="vi $filepath"
+        elif [ -f "$filepath" ]; then
+            BUFFER="$EDITOR $filepath"
         fi
         zle accept-line
     fi
