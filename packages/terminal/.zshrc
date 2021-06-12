@@ -64,8 +64,15 @@ if [[ -f $(brew --prefix asdf)/asdf.sh ]]; then
 fi
 # }}}
 
-# starship {{{
+# Pronpt {{{
+# starship
 eval "$(starship init zsh)"
+
+# タブにカレントディレクトリを表示
+# ログイン時
+echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007" 
+# ディレクトリが変わった時
+function chpwd() { echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007" }
 # }}}
 
 # zoxide {{{
