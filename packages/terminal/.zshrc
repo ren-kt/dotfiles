@@ -1,5 +1,5 @@
 # inport plugin {{{
-source ~/.zsh/plugin.zsh
+source ~/.zsh/plugins.zsh
 # }}}
 
 # history {{{
