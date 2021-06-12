@@ -1,9 +1,10 @@
 # ls
 alias ls="exa"
-alias ll="ls -lah --git"
+alias ll="ls -la --git"
 alias lt="ll -TL 3 --ignore-glob=.git"
 
 # cd
+alias ..='cd ..'
 alias ..2='cd ../..'
 alias ..3='cd ../../..'
 alias ..4='cd ../../../..'

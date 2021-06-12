@@ -21,19 +21,17 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-## コマンド補完
-# 非同期でプラグインを読み込むオプション
+## コマンド補完強化
 zinit ice wait'0' lucid; zinit light zsh-users/zsh-completions
-autoload -Uz compinit && compinit
 
-## 補完で小文字でも大文字にマッチさせる
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-
-## 補完候補を一覧表示したとき、Tabや矢印で選択できるようにする
-zstyle ':completion:*:default' menu select=1
-
-## シンタックスハイライト
-zinit light zsh-users/zsh-syntax-highlighting
+## コマンドライン自体の色付け
+zinit ice wait'0' lucid; zinit light zsh-users/zsh-syntax-highlighting
 
 ## 履歴補完
 zinit light zsh-users/zsh-autosuggestions
+
+## 既存の cd をオーバライドして強化したコマンド
+zinit light b4b4r07/enhancd
+export ENHANCD_FILTER=fzf
+export ENHANCD_DISABLE_DOT=0
+export ENHANCD_DISABLE_HOME=0

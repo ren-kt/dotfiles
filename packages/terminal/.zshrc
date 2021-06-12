@@ -15,6 +15,14 @@ setopt share_history
 setopt hist_ignore_dups
 # }}}
 
+# completion {{{
+autoload -Uz compinit && compinit
+# ## 補完で小文字でも大文字にマッチさせる
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+## 補完候補を一覧表示したとき、Tabや矢印で選択できるようにする
+zstyle ':completion:*:default' menu select=1
+# }}}
+
 # cdr {{{
 # 開いたディレクトリの履歴からディレクトリを開く
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
@@ -25,14 +33,20 @@ zstyle ':chpwd:*' recent-dirs-max 1000
 zstyle ':chpwd:*' recent-dirs-file ~/.cache/chpwd-recent-dirs
 # }}}
 
-
 # color {{{
-export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+# export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 # 補完候補にもシンタックスハイライトが反映される設定
 # verboseスタイルにyes
 zstyle ':completion:*' verbose yes
 # 補完候補一覧をカラー表示
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' list-colors ""
+
+# less
+export LESS='-R'
+
+# man
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # }}}
 
 # option {{{
@@ -46,25 +60,13 @@ setopt nolistbeep
 setopt AUTO_PARAM_KEYS
 # }}}
 
-# FUNCTION {{{
-function pr-open {
-    local url
-    url=$(hub pr list -h "$(git symbolic-ref --short HEAD)" -f "%U")
-    if [[ -z $url ]]; then
-        echo "The PR based this branch not found."
-        return 1
-    fi
-    open "$url"
-}
-# }}}
-
 # asdf
 if [[ -f $(brew --prefix asdf)/asdf.sh ]]; then
     . $(brew --prefix asdf)/asdf.sh
 fi
 # }}}
 
-# Pronpt {{{
+# pronpt {{{
 # starship
 eval "$(starship init zsh)"
 
@@ -75,14 +77,15 @@ echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007"
 function chpwd() { echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007" }
 # }}}
 
-# zoxide {{{
-# eval "$(zoxide init zsh)"
-# }}}
-
-# OTHER {{{
+# other {{{
+# script
 export PATH=$PATH:$HOME/scripts
 
+# my git repository
 export GIT_CLONE_PATH="$HOME"/src/github.com/edm20627
+
+# neovim
+export XDG_CONFIG_HOME=~/.config
 
 # golang
 # export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
@@ -101,6 +104,19 @@ export GIT_CLONE_PATH="$HOME"/src/github.com/edm20627
 #     fi
 # }
 # # }}}
+
+# function {{{
+# PRをブラウザで開く
+function pr-open {
+    local url
+    url=$(hub pr list -h "$(git symbolic-ref --short HEAD)" -f "%U")
+    if [[ -z $url ]]; then
+        echo "The PR based this branch not found."
+        return 1
+    fi
+    open "$url"
+}
+# }}}
 
 # sub files {{{
 # alias

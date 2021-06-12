@@ -55,6 +55,7 @@ function fzf-cdr (){
 zle -N fzf-cdr
 bindkey '^E' fzf-cdr
 
+# fzf + git switch
 function fgs {
   local branches branch
   branches=$(git --no-pager branch -vv --color=always) &&

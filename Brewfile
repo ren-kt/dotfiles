@@ -27,6 +27,8 @@ brew 'tree'
 brew 'openssl'
 brew 'rbenv'
 brew 'hub'
+# tap 'jesseduffield/lazydocker'
+# brew 'lazydocker'
 tap "koekeishiya/formulae"
 brew "yabai"
 brew "skhd"
