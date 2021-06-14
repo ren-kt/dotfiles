@@ -8,6 +8,7 @@ function is_in_git_repo() {
 # Ctrl + R = history search
 function fzf-history-selection() {
     BUFFER=$(history -n 1 | tac  | awk '!a[$0]++' | fzf --no-sort --preview=)
+    # shellcheck disable=SC2034
     CURSOR=$#BUFFER
     zle reset-prompt
 }
@@ -17,7 +18,6 @@ bindkey '^R' fzf-history-selection
 # Ctrl + G = ghq list
 function fzf-ghq-look () {
     local selected_dir
-    # shellcheck disable=SC2153
     selected_dir=$(ghq list | fzf --preview=)
     if [ -n "$selected_dir" ]; then
         BUFFER="cd $(ghq list --full-path | grep --color=never -E "/$selected_dir$")"
@@ -33,7 +33,7 @@ function fzf-find () {
     if is_in_git_repo; then
         selected=$(git ls-files | fzf)
     else
-        selected=$(eval $FZF_DEFAULT_COMMAND | fzf)
+        selected=$(eval "$FZF_DEFAULT_COMMAND" | fzf)
     fi
     if [ -n "$selected" ]; then
         BUFFER="vi ${selected}"
@@ -46,8 +46,10 @@ bindkey '^F' fzf-find
 # Ctrl + E = cdr
 function fzf-cdr (){
     local selected_dir
-    selected_dir=$(cdr -l | awk '{ print $2 }' | fzf --preview 'f() { sh -c "ls -hFGl $1" }; f {}')
+    # shellcheck disable=SC2016
+    selected_dir=$(cdr -l | awk '{ print $2 }' | fzf --preview 'f() { sh -c "ls -hFGla $1" }; f {}')
     if [ -n "$selected_dir" ]; then
+        # shellcheck disable=SC2034
         BUFFER="cd ${selected_dir}"
         zle accept-line
     fi

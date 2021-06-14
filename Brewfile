@@ -28,6 +28,7 @@ brew 'tree'
 brew 'openssl'
 brew 'rbenv'
 brew 'hub'
+brew 'shellcheck'
 # tap 'jesseduffield/lazydocker'
 # brew 'lazydocker'
 tap "koekeishiya/formulae"

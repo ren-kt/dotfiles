@@ -62,7 +62,7 @@ setopt AUTO_PARAM_KEYS
 
 # asdf
 if [[ -f $(brew --prefix asdf)/asdf.sh ]]; then
-    . $(brew --prefix asdf)/asdf.sh
+    . "$(brew --prefix asdf)"/asdf.sh
 fi
 # }}}
 
@@ -78,9 +78,11 @@ eval "$(starship init zsh)"
 
 # タブにカレントディレクトリを表示
 # ログイン時
-echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007" 
+echo -ne "\033]0;$(pwd | rev | awk -F "/" '{print "/"$1"/"$2}'| rev)\007" 
 # ディレクトリが変わった時
-function chpwd() { echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007" }
+function chpwd() { 
+    echo -ne "\033]0;$(pwd | rev | awk -F "/" '{print "/"$1"/"$2}'| rev)\007" 
+    }
 # }}}
 
 # other {{{
@@ -94,8 +96,10 @@ export GIT_CLONE_PATH="$HOME"/src/github.com/edm20627
 export XDG_CONFIG_HOME=~/.config
 
 # golang
-export GOROOT=$(go env GOROOT)
-export GOPATH=$(go env GOPATH)
+GOROOT="$(go env GOROOT)"
+export GOROOT
+GOPATH=$(go env GOPATH)
+export GOPATH
 export PATH=$PATH:$GOPATH/bin
 
 # # tmux

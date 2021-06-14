@@ -26,7 +26,7 @@ else
             | .[].id
         ')
 
-    echo "$target_window_ids" | tr ' ' '\n' | while read id; do
+    echo "$target_window_ids" | tr ' ' '\n' | while read -r id; do
         yabai -m window "$id" --grid "$grid"
     done
 fi

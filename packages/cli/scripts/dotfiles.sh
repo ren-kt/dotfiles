@@ -72,7 +72,7 @@ fi
 
 if [ ! "$skip_apps" ]; then
     log 'Install Apps and CLIs'
-    brew bundle --file "$GIT_CLONE_PATH"/dotfiles/Brewfile $([ -n "$verbose" ] && echo -v)
+    brew bundle --file "$GIT_CLONE_PATH"/dotfiles/Brewfile "$([ -n "$verbose" ] && echo -v)"
 fi
 
 log 'Link dotfiles'
@@ -81,8 +81,7 @@ ensure_dir ~/.config/alacritty
 # shellcheck disable=SC2046
 stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls $STOW_PACKAGES_PATH)
 
-### asdf Install Script
-for plugin in $(awk '{print $1}' ~/.tool-versions); do
+awk '{print $1}' ~/.tool-versions | while IFS= read -r plugin; do
     if ! is_dir ~/.asdf/plugins/"$plugin"; then
         asdf plugin add "$plugin"
     fi
@@ -113,7 +112,7 @@ for plugin in $(asdf plugin list); do
     fi
 done
 
-sudo chmod -R a+wr /usr/local/bin
+# sudo chmod -R a+wr /usr/local/bin
 
 dein_cache_path=~/.cache/dein
 if ! is_dir "$dein_cache_path"; then
@@ -129,9 +128,10 @@ if ! is_dir "$dein_cache_path"; then
     npm install -g neovim
 fi
 
-if ! is_dir "~/Gemfile"; then
+gemfile_path=~/Gemfile
+if is_file "$gemfile_path"; then
     log 'Install gem'
-    bundle install
+    bundle install　1> /dev/null
 fi
 
 # if ! is_dir /Library/ScriptingAdditions/yabai.osax; then

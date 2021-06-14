@@ -5,9 +5,9 @@ attach_target="$1"
 ensure_session() {
   session_name="$1"
   repo="$2"
-  tmux has-session -t "$session_name" 2>/dev/null
+  
 
-  if [ "$?" != 0 ]; then
+  if ! tmux has-session -t "$session_name" 2>/dev/null; then
     tmux new -d -s "$session_name" -c "$HOME/src/github.com/$repo"
   fi
 }
