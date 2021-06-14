@@ -1,6 +1,6 @@
 "dein Scripts-----------------------------
 if &compatible
-  set nocompatible               " Be iMproved
+  set nocompatible " Be iMproved
 endif
 
 " Required:
@@ -11,7 +11,7 @@ call dein#begin('/Users/ren/.cache/dein')
 
 " Let dein manage dein
 " Required:
-" call dein#add('/Users/ren/.cache/dein/repos/github.com/Shougo/dein.vim')
+call dein#add('/Users/ren/.cache/dein/repos/github.com/Shougo/dein.vim')
 
 " Add or remove your plugins here like this:
 "call dein#add('Shougo/neosnippet.vim')
@@ -65,6 +65,7 @@ set list " 不可視文字を表示する
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:% " listの設定
 set clipboard+=unnamed " クリップボードを共有
 set mouse=a " スクロール
+set inccommand=split
 " }}}
 
 " Colors {{{
@@ -79,8 +80,8 @@ set completeopt=menuone,noinsert,noselect " 入力モードでの補完につい
 
 " カーソルラインの位置を保存する {{{
 augroup cursorlineRestore
-  au!
-  au BufReadPost *
+  autocmd!
+  autocmd BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal! g'\"" |
         \ endif
@@ -109,6 +110,7 @@ let g:netrw_preview=1 " プレビューウィンドウを垂直分割で表示�
 " テキストオブジェクトキーマッピング {{{
 let g:mapleader = ";" " Leaderキーを設定
 
+" オペレータ待機
 onoremap 8 i(
 onoremap 2 i"
 onoremap 7 i'
@@ -140,11 +142,6 @@ nnoremap va{ va{
 
 " タブ切り替え
 nnoremap <C-l> gt
-
-" 改行
-nnoremap <C-j> o<ESC>
-nnoremap <C-k> O<ESC>
-nnoremap o A<CR>
 
 " 囲う
 nnoremap <silent> gw[ cw``<Esc>P

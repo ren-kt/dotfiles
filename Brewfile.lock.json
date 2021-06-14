@@ -59,6 +59,35 @@
           }
         }
       },
+      "npm": {
+        "version": "16.3.0",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "arm64_big_sur": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/node/blobs/sha256:3de4ebc0c132da4b125beb6c18d54d386f89e46cbece31368a80c10bad6f9361",
+              "sha256": "3de4ebc0c132da4b125beb6c18d54d386f89e46cbece31368a80c10bad6f9361"
+            },
+            "big_sur": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/node/blobs/sha256:55593606699ac89f0a2d5e1e5340bc05f631bcac75ebab82ceecaa6b5cfe2f6d",
+              "sha256": "55593606699ac89f0a2d5e1e5340bc05f631bcac75ebab82ceecaa6b5cfe2f6d"
+            },
+            "catalina": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/node/blobs/sha256:fbfd0d5e00e9256e177c60926f0c94a632a7309a31d476d89030b5275a90a442",
+              "sha256": "fbfd0d5e00e9256e177c60926f0c94a632a7309a31d476d89030b5275a90a442"
+            },
+            "mojave": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/node/blobs/sha256:19e9b66f3ac6f089012d898efa2d8dcc4be7c42743d283bb5c35f01f30db5af6",
+              "sha256": "19e9b66f3ac6f089012d898efa2d8dcc4be7c42743d283bb5c35f01f30db5af6"
+            }
+          }
+        }
+      },
       "asdf": {
         "version": "0.8.1",
         "bottle": {
@@ -674,7 +703,7 @@
         "revision": "c5a605b018c05d08b90c4b794c088d25736997c3"
       },
       "homebrew/cask-fonts": {
-        "revision": "d0cdeeada58dd1aeed60dc55ec81a9448f11b9b1"
+        "revision": "56b5f04cc3904df158fa632c3776943d3e8177c2"
       }
     },
     "cask": {
@@ -840,19 +869,10 @@
           }
         }
       },
-      "font-roboto": {
-        "version": "latest",
+      "font-hack-nerd-font": {
+        "version": "2.1.0",
         "options": {
-          "full_name": "font-roboto",
-          "args": {
-            "appdir": "/Applications"
-          }
-        }
-      },
-      "font-roboto-mono": {
-        "version": "latest",
-        "options": {
-          "full_name": "font-roboto-mono",
+          "full_name": "font-hack-nerd-font",
           "args": {
             "appdir": "/Applications"
           }
@@ -865,7 +885,7 @@
       "big_sur": {
         "HOMEBREW_VERSION": "3.1.12",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "9a4020571c7c453b50a2218c6e609d92c5ae7e83",
+        "Homebrew/homebrew-core": "5aef09b8bf114d9e2c114355b898e5fb026b729f",
         "CLT": "12.5.0.0.1.1617976050",
         "Xcode": "12.5",
         "macOS": "11.4"

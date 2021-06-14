@@ -121,6 +121,17 @@ if ! is_dir "$dein_cache_path"; then
     curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
     sh ./installer.sh ~/.cache/dein  
     rm installer.sh
+
+    log 'Install neovim setup'
+    pip3 install --upgrade pip
+    pip3 install --user pynvim
+    gem install neovim
+    npm install -g neovim
+fi
+
+if ! is_dir "~/Gemfile"; then
+    log 'Install gem'
+    bundle install
 fi
 
 # if ! is_dir /Library/ScriptingAdditions/yabai.osax; then

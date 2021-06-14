@@ -66,6 +66,12 @@ if [[ -f $(brew --prefix asdf)/asdf.sh ]]; then
 fi
 # }}}
 
+# FZF {{{
+if [[ -f ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+fi
+# }}}
+
 # pronpt {{{
 # starship
 eval "$(starship init zsh)"
@@ -88,7 +94,9 @@ export GIT_CLONE_PATH="$HOME"/src/github.com/edm20627
 export XDG_CONFIG_HOME=~/.config
 
 # golang
-# export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOROOT=$(go env GOROOT)
+export GOPATH=$(go env GOPATH)
+export PATH=$PATH:$GOPATH/bin
 
 # # tmux
 # # バージョン管理システムから情報を取得

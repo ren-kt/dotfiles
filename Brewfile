@@ -3,6 +3,7 @@ cask_args appdir: "/Applications"
 # brew 'coreutils'
 brew "curl"
 brew "git"
+brew "npm"
 brew "asdf"
 brew "bat"
 brew "exa"
@@ -64,8 +65,7 @@ cask 'ngrok'
 tap "jason0x43/homebrew-neovim-nightly"
 cask "neovim-nightly"
 tap "homebrew/cask-fonts"
-cask "font-roboto"
-cask "font-roboto-mono"
+cask "font-hack-nerd-font"
 
 #  mas 'LINE', id: 539883307
 #  mas 'Microsoft OneNote', id: 784801555
