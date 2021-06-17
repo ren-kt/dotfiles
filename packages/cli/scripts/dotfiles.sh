@@ -5,8 +5,10 @@ set -e
 GIT_CLONE_PATH=~/src/github.com/edm20627
 STOW_PACKAGES_PATH="$GIT_CLONE_PATH"/dotfiles/packages
 
-unlink_packages=
+skip_apps=
 verbose=
+gem=
+unlink_packages=
 for i in "$@"; do
     case "$i" in
         -s|--skip-apps)
@@ -14,6 +16,9 @@ for i in "$@"; do
             shift ;;
         -v|--verbose)
             verbose=1
+            shift ;;
+        -g|--gem)
+            gem=1
             shift ;;
         -u=*|--unlink=*)
             unlink_packages="${i#*=}"
@@ -129,9 +134,15 @@ if ! is_dir "$dein_cache_path"; then
 fi
 
 gemfile_path=~/Gemfile
-if is_file "$gemfile_path"; then
+if is_file "$gemfile_path" && [ "$gem" ]; then
     log 'Install gem'
-    bundle install　1> /dev/null
+    bundle install
+fi
+
+tpm_path=~/.tmux/plugins/tpm
+if ! is_dir "$tpm_path"; then
+    log 'Setup tpm"'
+    git clone https://github.com/tmux-plugins/tpm "$tpm_path"
 fi
 
 # if ! is_dir /Library/ScriptingAdditions/yabai.osax; then
