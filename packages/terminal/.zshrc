@@ -105,21 +105,6 @@ GOPATH=$(go env GOPATH)
 export GOPATH
 export PATH=$PATH:$GOPATH/bin
 
-# # tmux
-# # バージョン管理システムから情報を取得
-# autoload -Uz vcs_info
-# zstyle ':vcs_info:*' enable git
-
-# precmd () {
-#     LANG=en_US.UTF-8 vcs_info
-#     # shellcheck disable=SC2154
-#     # vcs_info_msg_0_変数にバージョン管理システムの情報が格納
-#     if [[ -z ${vcs_info_msg_0_} ]] || [[ -e .git ]]; then
-#         tmux rename-window "$(basename "$(pwd)")"
-#     fi
-# }
-# # }}}
-
 # function {{{
 # PRをブラウザで開く
 function pr-open {

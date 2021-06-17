@@ -1,5 +1,7 @@
 shell:
-  program: /usr/local/bin/zsh
+  program: /bin/zsh
+  args:
+    - --login
 
 live_config_reload: true
 
@@ -9,51 +11,49 @@ key_bindings:
   - { key: J, mods: Control, action: ScrollPageDown }
   - { key: K, mods: Control, action: ScrollPageUp }
 
-# Cyber Punk Neon
-# Source: https://github.com/Roboron3042/Cyberpunk-Neon
-colors:
-  # Default colors
-  primary:
-    background: "0x000b1e"
-    foreground: "0x0abdc6"
-
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text:   "0x000b1e"
-    cursor: "0x0abdc6"
-
-  # Normal colors
-  normal:
-    black:   "0x123e7c"
-    red:     "0xff0000"
-    green:   "0xd300c4"
-    yellow:  "0xf57800"
-    blue:    "0x123e7c"
-    magenta: "0x711c91"
-    cyan:    "0x0abdc6"
-    white:   "0xd7d7d5"
-
-  # Bright colors
-  bright:
-    black:   "0x1c61c2"
-    red:     "0xff0000"
-    green:   "0xd300c4"
-    yellow:  "0xf57800"
-    blue:    "0x00ff00"
-    magenta: "0x711c91"
-    cyan:    "0x0abdc6"
-    white:   "0xd7d7d5"
-
 font:
   normal:
-    family: Roboto Mono
+    family: Hack Nerd Font
     style: Regular
-
   bold:
-    family: Roboto Mono
+    family: Hack Nerd Font
     style: Bold
-
   italic:
-    family: Roboto Mono
-    style: Light Italic
-  size: 16
+    family: Hack Nerd Font
+    style: Italic
+  size: 13.0
+
+# https://github.com/alacritty/alacritty/wiki/Color-schemes
+# Colors (Solarized Dark)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '#002b36' # base03
+#     foreground: '#839496' # base0
+
+#   # Cursor colors
+#   cursor:
+#     text:   '#002b36' # base03
+#     cursor: '#839496' # base0
+
+#   # Normal colors
+#   normal:
+#     black:   '#073642' # base02
+#     red:     '#dc322f' # red
+#     green:   '#859900' # green
+#     yellow:  '#b58900' # yellow
+#     blue:    '#268bd2' # blue
+#     magenta: '#d33682' # magenta
+#     cyan:    '#2aa198' # cyan
+#     white:   '#eee8d5' # base2
+
+#   # Bright colors
+#   bright:
+#     black:   '#002b36' # base03
+#     red:     '#cb4b16' # orange
+#     green:   '#586e75' # base01
+#     yellow:  '#657b83' # base00
+#     blue:    '#839496' # base0
+#     magenta: '#6c71c4' # violet
+#     cyan:    '#93a1a1' # base1
+#     white:   '#fdf6e3' # base3
