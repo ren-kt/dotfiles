@@ -58,6 +58,7 @@ cask 'clipy'
 cask 'kindle'
 cask 'gyazo'
 cask 'ngrok'
+# cask 'spectacle'
 # cask 'mysqlworkbench' バージョンが新しすぎるためてブラウザからダウンロード(6.3.10)
 # cask 'vagrant'
 # cask 'vagrant-manager'
