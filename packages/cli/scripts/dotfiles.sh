@@ -118,10 +118,11 @@ for plugin in $(asdf plugin list); do
 done
 
 # sudo chmod -R a+wr /usr/local/bin
+sudo chmod a+wr /usr/local/bin
 
 dein_cache_path=~/.cache/dein
 if ! is_dir "$dein_cache_path"; then
-    log 'Setup dein.vim"'
+    log 'Setup dein.vim'
     curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
     sh ./installer.sh ~/.cache/dein  
     rm installer.sh
@@ -141,24 +142,20 @@ fi
 
 tpm_path=~/.tmux/plugins/tpm
 if ! is_dir "$tpm_path"; then
-    log 'Setup tpm"'
+    log 'Setup tpm'
     git clone https://github.com/tmux-plugins/tpm "$tpm_path"
 fi
 
-# if ! is_dir /Library/ScriptingAdditions/yabai.osax; then
-#     log 'Setup yabai'
-#     sudo yabai --install-sa
-# fi
-
-# limelight_path=/usr/local/bin/limelight
-# if ! is_file "$limelight_path"; then
-#     git clone https://github.com/koekeishiya/limelight
-#     cd limelight
-#     make
-#     mv ./bin/limelight /usr/local/bin/limelight
-#     cd ../
-#     rm -rf limelight
-# fi
+limelight_path=/usr/local/bin/limelight
+if ! is_file "$limelight_path"; then
+    log 'Setup limelight'
+    git clone https://github.com/koekeishiya/limelight
+    cd limelight
+    make
+    mv ./bin/limelight /usr/local/bin/limelight
+    cd ../
+    rm -rf limelight
+fi
 
 # if ! is_dir ~/.hammerspoon; then
 #     mkdir ~/.hammerspoon
@@ -172,3 +169,5 @@ fi
 #         echo 'stackline:init()' >> init.lua
 #     )
 # fi
+
+log 'Finish!!'
