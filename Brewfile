@@ -6,7 +6,6 @@ brew "curl"
 brew 'tree'
 brew "git"
 brew "npm"
-brew 'rbenv'
 brew "asdf"
 brew "bat"
 brew "exa"
@@ -27,6 +26,7 @@ tap "koekeishiya/formulae"
 brew "yabai"
 tap 'heroku/brew'
 brew 'heroku'
+# brew 'rbenv'
 # brew "lf"
 # brew "htop"
 # brew "ncdu"
