@@ -38,6 +38,7 @@ brew 'heroku'
 # tap 'jesseduffield/lazydocker'
 # brew 'lazydocker'
 
+cask "dropbox"
 cask "alacritty"
 cask 'iterm2'
 cask "alfred"
