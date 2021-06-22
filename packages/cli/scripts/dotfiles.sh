@@ -70,7 +70,7 @@ ensure_dir "$GIT_CLONE_PATH"
 if ! is_dir "$GIT_CLONE_PATH"/dotfiles; then
     log 'Clone dotfiles'
     cd "$GIT_CLONE_PATH"
-    git clone git@github.com:edm20627/dotfiles.git
+    git clone https://github.com/ren-kt/dotfiles.git
 fi
 
 if [ ! "$skip_apps" ]; then
