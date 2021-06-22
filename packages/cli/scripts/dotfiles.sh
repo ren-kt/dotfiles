@@ -1,6 +1,6 @@
-#!/bin/sh 
- 
-set -e 
+#!/bin/sh
+
+set -e
 
 GIT_CLONE_PATH=~/src/github.com/edm20627
 STOW_PACKAGES_PATH="$GIT_CLONE_PATH"/dotfiles/packages
@@ -54,13 +54,11 @@ if [ -n "$unlink_packages" ]; then
     stow -vD -d "$STOW_PACKAGES_PATH" -t ~ "$unlink_packages"
     exit
 fi
- 
-if [ "$(dscl . -read ~/ UserShell)" = "UserShell: /bin/bash" ]; then 
+
+if [ "$(dscl . -read ~/ UserShell)" = "UserShell: /bin/bash" ]; then
     log 'Change default shell to zsh'
     chsh -s /bin/zsh
-    chmod -R 755 /usr/local/share/zsh
-    chown -R root:staff zsh
-fi 
+fi
 
 if ! is_file /usr/local/bin/brew; then
     log 'Setup Homebrew'
@@ -124,7 +122,7 @@ dein_cache_path=~/.cache/dein
 if ! is_dir "$dein_cache_path"; then
     log 'Setup dein.vim'
     curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-    sh ./installer.sh ~/.cache/dein  
+    sh ./installer.sh ~/.cache/dein
     rm installer.sh
 
     log 'Install neovim setup'
