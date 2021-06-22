@@ -2,11 +2,12 @@ cask_args appdir: "/Applications"
 
 brew "mas"
 brew "mackup"
+brew "coreutils"
 brew "curl"
-brew "tree"
 brew "git"
-brew "npm"
 brew "asdf"
+brew "tree"
+brew "npm"
 brew "bat"
 brew "exa"
 brew "fzf"
@@ -21,9 +22,9 @@ brew "ghq"
 brew "hub"
 brew "openssl"
 brew "shellcheck"
-brew "skhd"
 tap "koekeishiya/formulae"
 brew "yabai"
+brew "skhd"
 tap "heroku/brew"
 brew "heroku"
 # brew "rbenv"
@@ -67,6 +68,6 @@ cask "font-hack-nerd-font"
 # cask "virtualbox"
 # cask "spectacle"
 
- mas "LINE", id: 539883307
- mas "Microsoft OneNote", id: 784801555
- mas "Duplicate Photos Fixer Pro", id: 963642514
+#  mas "LINE", id: 539883307
+#  mas "Microsoft OneNote", id: 784801555
+#  mas "Duplicate Photos Fixer Pro", id: 963642514
