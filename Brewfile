@@ -22,6 +22,8 @@ brew "ghq"
 brew "hub"
 brew "openssl"
 brew "shellcheck"
+brew "fswatch" # docker-sync gem
+brew "unison" # docker-sync gem
 tap "koekeishiya/formulae"
 brew "yabai"
 brew "skhd"
