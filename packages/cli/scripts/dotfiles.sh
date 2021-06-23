@@ -132,7 +132,7 @@ gemfile_path=~/Gemfile
 if is_file "$gemfile_path" && [ ! "$gem" ]; then
     log 'Install gem'
     ~/.asdf/shims/gem install bundler
-    bundle install
+    ~/.asdf/shims/bundle install
 fi
 
 dein_cache_path=~/.cache/dein
