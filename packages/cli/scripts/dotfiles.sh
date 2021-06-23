@@ -64,8 +64,8 @@ if ! is_file /usr/local/bin/brew; then
     log 'Setup Homebrew'
     # sudo chown $(whoami):admin /usr/local && sudo chown -R $(whoami):admin /usr/local
     # chown $(whoami):admin /usr/local && chown -R $(whoami):admin /usr/local
-    chown $(whoami):admin /usr/local
-    # chown -R $(whoami):admin /usr/local
+    sudo chown $(whoami):admin /usr/local
+    # sudo chown -R $(whoami):admin /usr/local
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew doctor
