@@ -58,9 +58,9 @@ fi
 if [ "$(dscl . -read ~/ UserShell)" = "UserShell: /bin/bash" ]; then
     log 'Change default shell to zsh'
     chsh -s /bin/zsh
-    chmod 755 /usr/local/share/zsh/site-functions
-    chmod 755 /usr/local/share/zsh
 fi
+chmod 755 /usr/local/share/zsh/site-functions
+chmod 755 /usr/local/share/zsh
 
 if ! is_file /usr/local/bin/brew; then
     log 'Setup Homebrew'
