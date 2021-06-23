@@ -160,4 +160,10 @@ if ! is_file "$limelight_path"; then
     rm -rf limelight
 fi
 
+log 'Configuring macOS default settings'
+# 隠しファイルを表示する
+defaults write com.apple.finder AppleShowAllFiles -boolean true
+# 共有フォルダで .DS_Store ファイルを作成しない
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+
 log 'Finish!!'
