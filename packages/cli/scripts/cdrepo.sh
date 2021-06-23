@@ -1,11 +1,10 @@
-#!/bin/sh 
+#!/bin/sh
 
 repo_alias=$1
 
-
 repo_name=
 case "$repo_alias" in
-    dotfiles)    
+    dotfiles)
         repo_name=dotfiles
         ;;
     xxx)

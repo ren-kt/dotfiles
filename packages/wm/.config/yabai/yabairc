@@ -40,7 +40,7 @@ yabai -m config window_gap                   06
 
 # debug
 yabai -m config debug_output on
-# view the last lines of the error log 
+# view the last lines of the error log
 # tail -f /usr/local/var/log/yabai/yabai.err.log
 # view the last lines of the debug log
 # tail -f /usr/local/var/log/yabai/yabai.out.log
