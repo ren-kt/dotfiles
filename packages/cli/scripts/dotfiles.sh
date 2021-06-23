@@ -62,8 +62,12 @@ fi
 
 if ! is_file /usr/local/bin/brew; then
     log 'Setup Homebrew'
-    # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # sudo chown $(whoami):admin /usr/local && sudo chown -R $(whoami):admin /usr/local
+    # chown $(whoami):admin /usr/local && chown -R $(whoami):admin /usr/local
+    chown $(whoami):admin /usr/local
+    # chown -R $(whoami):admin /usr/local
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew doctor
     chmod 755 /usr/local/share/zsh/site-functions
     chmod 755 /usr/local/share/zsh
