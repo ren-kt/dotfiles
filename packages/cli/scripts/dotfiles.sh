@@ -62,11 +62,12 @@ fi
 
 if ! is_file /usr/local/bin/brew; then
     log 'Setup Homebrew'
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew doctor
     chmod 755 /usr/local/share/zsh/site-functions
     chmod 755 /usr/local/share/zsh
+    chmod 755 /usr/local/bin
 fi
 
 ensure_dir "$GIT_CLONE_PATH"
@@ -121,7 +122,7 @@ done
 
 # sudo chmod -R a+wr /usr/local/bin
 # sudo chmod a+wr /usr/local/bin
-sudo chmod 755 /usr/local/bin
+# sudo chmod 755 /usr/local/bin
 
 gemfile_path=~/Gemfile
 if is_file "$gemfile_path" && [ ! "$gem" ]; then
