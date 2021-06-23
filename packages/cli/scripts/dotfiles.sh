@@ -62,6 +62,9 @@ fi
 
 if ! is_file /usr/local/bin/brew; then
     log 'Setup Homebrew'
+    echo "****"
+    echo $(whoami)
+    echo "****"
     # sudo chown $(whoami):admin /usr/local && sudo chown -R $(whoami):admin /usr/local
     # chown $(whoami):admin /usr/local && chown -R $(whoami):admin /usr/local
     sudo chown $(whoami):admin /usr/local
