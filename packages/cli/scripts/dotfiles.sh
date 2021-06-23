@@ -59,13 +59,14 @@ if [ "$(dscl . -read ~/ UserShell)" = "UserShell: /bin/bash" ]; then
     log 'Change default shell to zsh'
     chsh -s /bin/zsh
 fi
-chmod 755 /usr/local/share/zsh/site-functions
-chmod 755 /usr/local/share/zsh
 
 if ! is_file /usr/local/bin/brew; then
     log 'Setup Homebrew'
-    # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew doctor
+    chmod 755 /usr/local/share/zsh/site-functions
+    chmod 755 /usr/local/share/zsh
 fi
 
 ensure_dir "$GIT_CLONE_PATH"
