@@ -122,6 +122,13 @@ done
 # sudo chmod a+wr /usr/local/bin
 sudo chmod 755 /usr/local/bin
 
+gemfile_path=~/Gemfile
+if is_file "$gemfile_path" && [ ! "$gem" ]; then
+    log 'Install gem'
+    ~/.asdf/shims/gem install bundler
+    bundle install
+fi
+
 dein_cache_path=~/.cache/dein
 if ! is_dir "$dein_cache_path"; then
     log 'Setup dein.vim'
@@ -132,15 +139,8 @@ if ! is_dir "$dein_cache_path"; then
     log 'Install neovim setup'
     pip3 install --upgrade pip
     pip3 install --user pynvim
-    ~/.asdf/shims/gem install neovim
+    # ~/.asdf/shims/gem install neovim # bundle installで実行済み
     npm install -g neovim
-fi
-
-gemfile_path=~/Gemfile
-if is_file "$gemfile_path" && [ ! "$gem" ]; then
-    log 'Install gem'
-    ~/.asdf/shims/gem install bundler
-    bundle install
 fi
 
 tpm_path=~/.tmux/plugins/tpm
