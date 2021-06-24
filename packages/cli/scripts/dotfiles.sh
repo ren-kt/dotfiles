@@ -62,13 +62,9 @@ fi
 
 if ! is_file /usr/local/bin/brew; then
     log 'Setup Homebrew'
-    # sudo chown $(whoami):admin /usr/local && sudo chown -R $(whoami):admin /usr/local
-    # chown $(whoami):admin /usr/local && chown -R $(whoami):admin /usr/local
-    # sudo chown $(whoami):admin /usr/local
-    # sudo chown -R $(whoami):admin /usr/local
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew doctor
+
     chmod 755 /usr/local/share/zsh/site-functions
     chmod 755 /usr/local/share/zsh
     chmod 755 /usr/local/bin
@@ -123,10 +119,6 @@ for plugin in $(asdf plugin list); do
         asdf install "$plugin"
     fi
 done
-
-# sudo chmod -R a+wr /usr/local/bin
-# sudo chmod a+wr /usr/local/bin
-# sudo chmod 755 /usr/local/bin
 
 gemfile_path=~/Gemfile
 if is_file "$gemfile_path" && [ ! "$gem" ]; then
